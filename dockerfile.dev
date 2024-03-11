@@ -1,0 +1,14 @@
+FROM node:lts
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+#RUN npm i -D @swc/cli @swc/core
+
+#Check if node_modules are installed and then run the app
+CMD [ -d "node_modules" ] && npm run start:dev || npm install && npm run start:dev
